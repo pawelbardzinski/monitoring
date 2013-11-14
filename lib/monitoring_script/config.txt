@@ -1,0 +1,3 @@
+hostname: ec2-54-201-56-134.us-west-2.compute.amazonaws.com
+user: ec2-user
+keys-file: /Users/bardzinskip/.ssh/AWS_demo_key_pair.pem
