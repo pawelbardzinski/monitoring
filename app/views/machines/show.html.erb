@@ -1,0 +1,42 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nickname:</strong>
+  <%= @machine.nickname %>
+</p>
+
+<p>
+  <strong>Hostname:</strong>
+  <%= @machine.hostname %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @machine.user %>
+</p>
+
+<p>
+  <strong>Keys file:</strong>
+  <%= @machine.keys_file %>
+</p>
+
+<%= link_to 'Back', machines_path(@machine) %> |
+<%= link_to 'Edit', edit_machine_path(@machine) %> |
+<%= link_to 'Add Machine', new_machine_path %>
+
+<br/><br/>
+
+<h3>CPU Usage</h3>
+<%= line_chart [
+	{name: "CPU %", data: DataPoint.where(:machine_id => @machine.id).map{|dp| [dp.created_at, dp.cpu_usage]}}
+	] %>
+
+<br/>
+
+<h3>Memory Usage</h3>
+<%= line_chart [
+	{name: "Memory %", data: DataPoint.where(:machine_id => @machine.id).map{|dp| [dp.created_at, dp.mem_usage]}}
+	] %>
+

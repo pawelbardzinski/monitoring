@@ -1,0 +1,33 @@
+<h1>Listing machines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nickname</th>
+      <th>Hostname</th>
+      <th>User</th>
+      <th>Keys file</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @machines.each do |machine| %>
+      <tr>
+        <td><%= machine.nickname %></td>
+        <td><%= machine.hostname %></td>
+        <td><%= machine.user %></td>
+        <td><%= machine.keys_file %></td>
+        <td><%= link_to 'Show', machine %></td>
+        <td><%= link_to 'Edit', edit_machine_path(machine) %></td>
+        <td><%= link_to 'Destroy', machine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Machine', new_machine_path %>
