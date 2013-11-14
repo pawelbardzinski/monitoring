@@ -1,28 +1,15 @@
 require 'net/ssh'
 
-unless File.exists?('config.txt') 
-  puts
-  puts '> config.txt file not found in the current directory!'
-  puts '> config.txt sample contents:'
-  puts '##### config.txt file STARTS HERE #####'
-  puts '# Commented lines start with a hash character'
-  puts 'hostname: ec2-54-201-56-134.us-west-1.compute.amazonaws.com'
-  puts 'user: ec2-user'
-  puts 'keys-file: /Users/bardzinskip/.ssh/AWS_demo_key_pair.pem'
-  puts '##### config.txt file ENDS HERE #####'
-  puts
+unless ARGV.size == 3
+  puts '# Usage:'
+  puts '> ruby monitoring.rb [hostname] [user] [path to the key file]'
   exit
 end
 
-config = File.open('config.txt','r') 
-contents = config.read
-contents.match(/hostname:(.+)/)
-hostname = $1.gsub!(/\s+/,"")
-contents.match(/user:(.+)/)
-user = $1.gsub!(/\s+/,"")
-contents.match(/keys-file:(.+)/)
-keys_file = $1.gsub!(/\s+/,"")
-
+hostname = ARGV[0]
+user = ARGV[1]
+keys_file = ARGV[2]
+  
 cpu_stdout = ''
 mem_stdout = ''
 Net::SSH.start(hostname,user,:keys=>keys_file) do |ssh|
