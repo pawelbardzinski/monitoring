@@ -31,6 +31,12 @@ gem 'rufus-scheduler'
 
 gem 'net-ssh'
 
+gem 'groupdate'
+
+gem 'active_median'
+
+gem 'chartkick'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
